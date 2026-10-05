@@ -1,0 +1,32 @@
+Especificação Funcional: Simulação Visual de Kanban Puxado (Statu 3.8)
+1. Objetivo da Simulação
+Desenvolver uma simulação visual (em Python/Streamlit, HTML/JS ou ferramenta similar) que demonstre o comportamento dinâmico de um supermercado Kanban vertical ao longo do tempo, considerando a variação diária da demanda, o esvaziamento das zonas do Kanban (de cima para baixo) e o acionamento automático da máquina para reabastecimento.
+2. Estrutura do Kanban (Layout Visual)
+ Orientação: Vertical, exibida de forma retilínea e sequencial (de cima para baixo).
+ Composição Total: 20 cartões/posições no total (20 \times 144 = 2.880 peças).
+ Zonas (de cima para baixo):
+1. Zona Verde (Topo): 12 cartões (Representa o nível seguro/conforto).
+2. Zona Amarela (Meio): 1 cartão (Representa o ponto de reabastecimento / gatilho).
+3. Zona Vermelha (Base): 7 cartões (Representa o estoque crítico de segurança).
+ Regra do Roller: Cada cartão representa um roller físico equivalente a 144 peças.
+3. Dinâmica e Regras de Negócio (Lógica de Funcionamento)
+Passo 1: Estado Inicial
+ O Kanban inicia completamente cheio: 12 cartões verdes. (Total de 2.880 peças disponíveis).
+ O status da máquina inicia como Desligada (Standby).
+Passo 2: Consumo Diário (Demanda)
+ A cada ciclo/dia, uma demanda variável é inserida (ex: média de 1.845 peças/dia, com oscilação realista).
+ O sistema converte a quantidade de peças demandadas em número de cartões retirados (arredondado para o inteiro correspondente, ex: consumo de ~1.000 peças remove cerca de 7 cartões).
+ Sentido do Esvaziamento: O consumo esvazia o Kanban de cima para baixo (começa a retirar os cartões verdes, descendo em direção ao amarelo e vermelho).
+Passo 3: Gatilho de Produção (A Máquina Liga)
+ O nível do Kanban é monitorado após o consumo.
+ Condição de Disparo: Se o consumo fizer o estoque atingir ou ultrapassar a Zona Amarela ou Zona Vermelha, o sistema identifica a necessidade de reposição.
+ Ação: A máquina é ligada automaticamente para reabastecer o supermercado.
+Passo 4: Reabastecimento Visual
+ Com a máquina ligada, a simulação deve mostrar o Kanban sendo preenchido de baixo para cima (ou preenchendo os espaços vazios de forma fluida) até retornar à capacidade máxima (completando os 12 cartões verdes novamente).
+ Assim que o Kanban atinge o nível máximo, a produção é interrompida (máquina volta para Standby).
+Passo 5: Continuidade (Dias Seguintes)
+ No dia seguinte, uma nova demanda aleatória é aplicada, fazendo o ciclo se repetir: consumo \rightarrow queda no nível \rightarrow atingimento do amarelo \rightarrow religamento da máquina \rightarrow reabastecimento \rightarrow parada da máquina.
+4. Requisitos Visuais para a Programação
+ Painel Gráfico (Dashboard): Mostrar o status visual dos cartões (cores verde, amarelo e vermelho) mudando de tamanho ou acendendo/apagando conforme as peças são consumidas e repostas.
+ Indicadores de Status: Um sinalizador claro na tela indicando se a máquina está "LIGADA (Produzindo)" ou "DESLIGADA (Standby)" em cada momento da simulação.
+ Controles de Usuário (Opcional): Um botão de "Avançar Dia" ou Play/Pause para que o observador consiga acompanhar a animação passo a passo, vendo a demanda retirar os cartões e a máquina repô-los.
