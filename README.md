@@ -32,13 +32,13 @@ O Streamlit abrirá o simulador no navegador. O código fica local e editável n
 ## O que o protótipo simula
 
 - Trilho vertical com zonas verde, amarela e vermelha.
-- 20 posições por padrão: 12 verdes, 1 amarela e 7 vermelhas.
+- 19 posições por padrão: 13 verdes, 1 amarela e 5 vermelhas.
 - 144 peças por roller.
-- Estado inicial cheio (20 rollers; capacidade de 2.880 peças).
+- Estado inicial cheio (19 rollers; capacidade de 2.736 peças).
 - Demanda variável dia a dia, ancorada na demanda semanal confirmada de 11.069 peças (1.845 peças/dia em 6 dias produtivos); a variação diária é apenas demonstrativa, não uma série histórica real — veja `dados_confirmados.md`.
 - Conversão da demanda diária em cartões por arredondamento para cima.
 - Retirada dos cartões ao longo das horas de operação.
-- A cada dia, após o consumo, a máquina repõe o que a capacidade de produção diária permitir — não espera o estoque cair na faixa amarela/vermelha (8 rollers no cenário padrão) para começar. O nível sobe e desce dia a dia, podendo terminar no verde, no limiar ou na faixa amarela/vermelha.
+- A cada dia, após o consumo, a máquina repõe o que a capacidade de produção diária permitir — não espera o estoque cair na faixa amarela/vermelha (6 rollers no cenário padrão) para começar. O nível sobe e desce dia a dia, podendo terminar no verde, no limiar ou na faixa amarela/vermelha.
 - Produção na taxa configurada e liberação de um roller por vez ao completar 144 peças; rollers prontos ficam separados do roller em produção (WIP), que não conta como estoque disponível.
 - Máquina em produção até o estoque voltar à capacidade máxima ou esgotar a capacidade de produção do dia.
 - Painel de capacidade teórica vs. demanda informada: 3 turnos (7,42 + 7,42 + 5,33 = 20,17 h/dia), 75 peças/h efetivas, 1.512,75 peças/dia, 9.076,5 peças/semana (6 dias produtivos) comparadas aos 11.069 peças/semana informados — apresentado como alerta teórico para validação, não déficit confirmado.
@@ -50,7 +50,7 @@ O Streamlit abrirá o simulador no navegador. O código fica local e editável n
 - **Produção:** 75 peças/h é a taxa efetiva informada, já considerando o rendimento de 76% — não é aplicado novamente no cálculo.
 - **Conferência da taxa:** 37,97 s por peça × 76% de rendimento implica aproximadamente 72,1 peças/h, diferente das 75 peças/h informadas. O simulador usa 75 como dado reportado, mas essa taxa precisa ser validada.
 - **Horas por dia:** 20,17 h/dia é a soma dos 3 turnos informados (7,42 + 7,42 + 5,33 h); editável no simulador caso outra jornada se aplique.
-- **20 posições cheias:** interpretação adotada para conciliar capacidade total de 20 com a divisão 12+1+7. O texto também menciona “12 cartões verdes” como estoque inicial e “2.880 peças”; esses números não batem se 12 significar quantidade total. O protótipo interpreta 12 como tamanho da zona verde.
+- **19 posições cheias:** a capacidade padrão atual é a soma de 13 cartões verdes, 1 amarelo e 5 vermelhos. O protótipo interpreta os números das zonas como a capacidade de cada faixa e inicia com o trilho cheio.
 - **Operadores:** existem operadores por operação/turno, mas a quantidade não foi informada; o simulador não limita a produção por esse fator.
 - Consumo e produção ocorrem dentro da mesma janela de operação, e a demanda se distribui uniformemente nesse período.
 - A máquina repõe todo dia em que há consumo, limitada pela capacidade de produção diária; a faixa amarela/vermelha é uma classificação visual de risco, não o gatilho exclusivo da produção.

@@ -15,11 +15,11 @@ from simulation import (
 
 class SimulationTests(unittest.TestCase):
     def test_no_demand_does_not_start_machine_when_full(self):
-        cfg = SimulationConfig(days=2, average_daily_demand=0, initial_stock_slots=20)
+        cfg = SimulationConfig(days=2, average_daily_demand=0, initial_stock_slots=19)
         daily, _ = simulate(cfg, [0, 0])
         self.assertEqual(sum(row["acionamentos_maquina"] for row in daily), 0)
         self.assertEqual(sum(row["producao_pecas"] for row in daily), 0)
-        self.assertEqual(daily[-1]["estoque_final_rollers"], 20)
+        self.assertEqual(daily[-1]["estoque_final_rollers"], 19)
 
     def test_demand_is_rounded_up_to_whole_roller(self):
         cfg = SimulationConfig(days=1, average_daily_demand=145, operating_hours_per_day=1,
@@ -43,7 +43,7 @@ class SimulationTests(unittest.TestCase):
         # A reposição deve ocorrer no mesmo dia mesmo sem cruzar a faixa amarela/vermelha; a capacidade
         # diária é suficiente para repor quase tudo (o último cartão consumido perto do fim do dia pode
         # não dar tempo de ser totalmente reposto, terminando bem perto do topo, ainda na zona verde).
-        cfg = SimulationConfig(days=1, initial_stock_slots=20, average_daily_demand=500)
+        cfg = SimulationConfig(days=1, initial_stock_slots=19, average_daily_demand=500)
         daily, _ = simulate(cfg, [500])
         row = daily[0]
         self.assertEqual(row["cartoes_retirados"], 4)

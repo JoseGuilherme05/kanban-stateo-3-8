@@ -115,13 +115,13 @@ with st.sidebar:
         days = st.number_input("Dias a simular", min_value=1, max_value=30, value=7, step=1)
 
         st.markdown('<p class="param-hint">Posições do trilho com estoque saudável, sem necessidade de reposição imediata.</p>', unsafe_allow_html=True)
-        green = st.number_input("Posições verdes", min_value=0, max_value=50, value=12, step=1)
+        green = st.number_input("Posições verdes", min_value=0, max_value=50, value=13, step=1)
 
         st.markdown('<p class="param-hint">Posições de alerta: sinalizam que o estoque está se aproximando do nível crítico.</p>', unsafe_allow_html=True)
         yellow = st.number_input("Posições amarelas", min_value=0, max_value=20, value=1, step=1)
 
         st.markdown('<p class="param-hint">Posições de risco: estoque baixo indicando situação crítica, mas a reposição já ocorre todo dia em que há consumo.</p>', unsafe_allow_html=True)
-        red = st.number_input("Posições vermelhas", min_value=0, max_value=50, value=7, step=1)
+        red = st.number_input("Posições vermelhas", min_value=0, max_value=50, value=5, step=1)
 
         st.markdown('<p class="param-hint">Quantidade de peças que cabem em um roller; usado para converter peças em rollers no cálculo do kanban.</p>', unsafe_allow_html=True)
         pieces_per_roller = st.number_input("Peças por roller", min_value=1, max_value=10000, value=144, step=1)
@@ -164,15 +164,15 @@ with st.sidebar:
         )
         run_button = st.form_submit_button("Simular cenário", type="primary", width="stretch")
 
-    if capacity_slots != 20:
+    if capacity_slots != 19:
         st.warning(f"Com as zonas atuais, a capacidade física passa a {capacity_slots} rollers.")
-    if green + yellow + red != 20 and capacity_slots == 20:
+    if green + yellow + red != 19 and capacity_slots == 19:
         st.info("As posições verdes/amarelas/vermelhas diferem da divisão indicada na especificação.")
 
 if "scenario_values" not in st.session_state:
     st.session_state.scenario_values = {
-        "days": 7, "green": 12, "yellow": 1, "red": 7,
-        "pieces_per_roller": 144, "initial_stock": 20,
+        "days": 7, "green": 13, "yellow": 1, "red": 5,
+        "pieces_per_roller": 144, "initial_stock": 19,
         "mean_demand": 1845, "variability_pct": 15,
         "production_rate": CONFIRMED_EFFECTIVE_RATE_PIECES_PER_HOUR, "operating_hours": TOTAL_SHIFT_HOURS, "seed": 42,
         "machine_efficiency_pct": YIELD_RATE * 100,

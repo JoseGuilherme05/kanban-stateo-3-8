@@ -37,17 +37,15 @@ ajustáveis, não como fatos operacionais definitivos.
 ## Regras do Kanban
 
 - Um roller contém **144 peças**.
-- São **20 posições** no trilho: **12 verdes, 1 amarela e 7 vermelhas**.
-- **Ambiguidade a confirmar:** o texto da especificação menciona "12 cartões verdes"
-  como estado inicial e também cita capacidade de 2.880 peças (20 × 144). O protótipo
-  interpreta **12 como o tamanho da zona verde** (não o total inicial) e inicia a
-  simulação com os **20 rollers cheios**, até a regra real ser confirmada.
+- São **19 posições** no trilho: **13 verdes, 1 amarela e 5 vermelhas**.
+- O protótipo interpreta a quantidade de cartões de cada zona como sua capacidade e
+  inicia a simulação com os **19 rollers cheios**.
 - A demanda diária é convertida em cartões/rollers inteiros **arredondando para cima**
   (`Pasted_content.txt`).
 - **Reposição diária (clarificação do responsável pelo processo, 2026-10-01):** a cada
   dia, após o consumo da demanda, a máquina repõe o que a capacidade de produção diária
   permitir — não é necessário esperar o estoque cair na faixa amarela/vermelha
-  (8 rollers no arranjo 12+1+7) para a produção começar. O trilho esvazia com o consumo
+  (6 rollers no arranjo 13+1+5) para a produção começar. O trilho esvazia com o consumo
   e enche de volta com a produção do mesmo dia, podendo terminar no verde, no limiar ou
   na faixa amarela/vermelha, dependendo do saldo entre demanda e capacidade de produção.
   A faixa amarela/vermelha permanece como classificação visual de risco/alerta.

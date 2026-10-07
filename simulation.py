@@ -46,11 +46,11 @@ def production_rate_from_efficiency(efficiency: float) -> float:
 @dataclass(frozen=True)
 class SimulationConfig:
     days: int = 7
-    green_slots: int = 12
+    green_slots: int = 13
     yellow_slots: int = 1
-    red_slots: int = 7
+    red_slots: int = 5
     pieces_per_roller: int = 144
-    initial_stock_slots: int = 20
+    initial_stock_slots: int = 19
     average_daily_demand: float = 1845.0
     demand_variability: float = 0.15  # coeficiente de variação usado no cenário ilustrativo
     production_rate_pieces_per_hour: float = 75.0
